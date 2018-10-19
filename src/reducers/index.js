@@ -1,14 +1,15 @@
 import { combineReducers } from 'redux';
+import imagesReducer from './imagesReducer';
 
 let exportReducers;
 const reducers = {
-    // Imported reducers go here
+  images: imagesReducer
 };
 
 if (Object.keys(reducers).length) {
-    exportReducers = combineReducers(reducers);
+  exportReducers = combineReducers(reducers);
 } else {
-    exportReducers = () => {};
+  exportReducers = () => {};
 }
 
 export default exportReducers;

@@ -1,5 +1,7 @@
-import { /* applyMiddleware, */ compose, createStore } from 'redux';
+import { applyMiddleware, compose, createStore } from 'redux';
 import reducers from 'reducers';
+
+import initialState from './initialState';
 
 const configureStore = () => {
     return createStore(
