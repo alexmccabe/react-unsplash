@@ -1,38 +1,61 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
+// import PropTypes from 'prop-types';
+import * as imagesActions from 'actions/images';
+import { getVisibleImages, getIsFetching } from 'reducers/imagesReducer';
 
-import httpUnsplash from 'http/unsplash';
+import ImageList from 'components/ImageList/ImageList';
+import Loader from 'components/Loader/Loader';
 
 class ImageListContainer extends Component {
   static defaultProps = {};
   static propTypes = {};
 
-  state = {
-    images: []
-  };
-
   componentDidMount() {
-    // Initiate get data here
-    // this.getData();
+    if (!this.props.images.length) {
+      this.fetchData();
+    }
   }
 
-  getData = () => {
-    httpUnsplash
-      .get('/photos')
-      .then(response => this.setState({ images: response.data }))
-      .catch(err => console.error(err));
+  componentDidUpdate(prevProps) {
+    if (this.props.filter !== prevProps.filter) {
+      this.fetchData();
+    }
+  }
+
+  fetchData = () => {
+    const { filter, pageNum, fetchImages } = this.props;
+
+    fetchImages(filter, pageNum);
   };
 
   render() {
-    console.log(this.props.images);
-    return <div />;
-    // return <ImageList images={this.props.images} />;
+    const { images, isFetching /* ...rest */ } = this.props;
+
+    if (isFetching) {
+      return <Loader />;
+    }
+
+    return <ImageList images={images} />;
   }
 }
 
-const mapStateToProps = state => ({
-  images: state.images
-});
+const mapStateToProps = (state, ownProps) => {
+  const filter = ownProps.match.params.filter || 'latest';
+  const pageNum = ownProps.match.params.pageNum || 1;
 
-export default connect(mapStateToProps)(ImageListContainer);
+  return {
+    images: getVisibleImages(state, filter),
+    isFetching: getIsFetching(state),
+    filter,
+    pageNum
+  };
+};
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    imagesActions
+  )(ImageListContainer)
+);

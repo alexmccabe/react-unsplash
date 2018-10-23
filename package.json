@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "normalizr": "^3.3.0",
     "react": "^16.5.2",
     "react-dom": "^16.4.2",
     "react-redux": "^5.0.7",
@@ -33,5 +34,6 @@
       "Firefox ESR",
       "not ie < 11"
     ]
-  }
+  },
+  "devDependencies": {}
 }
