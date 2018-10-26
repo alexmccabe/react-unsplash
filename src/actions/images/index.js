@@ -17,7 +17,7 @@ export const fetchImages = (filter, pageNum) => dispatch => {
     pageNum
   });
 
-  imagesApi.getAll(filter, pageNum).then(response => {
+  return imagesApi.getAll(filter, pageNum).then(response => {
     dispatch({
       type: FETCH_IMAGES_SUCCESS,
       response: normalize(response.data, schema.imageListSchema),
