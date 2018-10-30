@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
 
 import {
-  CHANGE_IMAGE_PAGE,
   FETCH_IMAGES_SUCCESS,
   FETCH_IMAGES_REQUEST,
   FETCH_IMAGES_FAILURE,
@@ -56,7 +55,7 @@ const isFetching = (state = false, { type }) => {
 
 const pageNum = (state = 1, action) => {
   switch (action.type) {
-  case CHANGE_IMAGE_PAGE:
+  case FETCH_IMAGES_SUCCESS:
     return action.pageNum;
 
   default:
@@ -80,3 +79,4 @@ export const getVisibleImages = state => {
 };
 
 export const getIsFetching = state => state.images.isFetching;
+export const getPageNumber = state => state.images.pageNum;

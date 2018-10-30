@@ -21,7 +21,8 @@ export const fetchImages = (filter, pageNum) => dispatch => {
     dispatch({
       type: FETCH_IMAGES_SUCCESS,
       response: normalize(response.data, schema.imageListSchema),
-      filter
+      filter,
+      pageNum
     });
   });
 };

@@ -3,7 +3,7 @@ import { generateRandomInteger } from 'utils/math';
 import data from './images.json';
 
 function delay(time) {
-  time = time || generateRandomInteger(2000, 5000);
+  time = time || generateRandomInteger(1000, 2000);
 
   return new Promise(resolve => setTimeout(resolve, time));
 }
