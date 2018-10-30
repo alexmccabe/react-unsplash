@@ -1,20 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import FilterBar from './FilterBar';
+import ImageListItem from './ImageListItem/ImageListItem';
+
+import styles from './image-list.module.scss';
 
 const ImageList = ({ images }) => {
   return (
     <div>
       <FilterBar />
 
-      {images.map(image => {
-        return (
-          <Link to={`/photos/${image.id}`} key={image.id}>
-            <img src={image.urls.regular} alt="" />
-          </Link>
-        );
-      })}
+      <div className={styles.list}>
+        {images.map(image => {
+          return <ImageListItem imageData={image} key={image.id} />;
+        })}
+      </div>
     </div>
   );
 };

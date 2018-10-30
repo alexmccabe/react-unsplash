@@ -1,0 +1,30 @@
+.item {
+    flex: 0 0 auto;
+    height: 0;
+    padding-bottom: 50%;
+    position: relative;
+    width: 50%;
+}
+
+.link {
+    display: block;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
+
+.image {
+    height: 100%;
+    position: absolute;
+    width: 100%;
+
+    &::after {
+        background-size: cover;
+        bottom: 0;
+        content: '';
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+}
