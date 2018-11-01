@@ -6,9 +6,7 @@ options:
   formatter: stylish
   merge-default-rules: true
 rules:
-  class-name-format:
-    - 1
-    - convention: hyphenatedbem
+  class-name-format: 0
   force-pseudo-nesting: 0
   id-name-format:
     - 1
