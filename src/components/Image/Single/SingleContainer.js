@@ -1,20 +1,26 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as imagesActions from 'actions/images';
 
 import { getImage, getIsFetching } from 'reducers/imagesReducer';
 
-import SingleImage from 'components/SingleImage/SingleImage';
-import Loader from 'components/Loader/Loader';
+import SingleImage from './Single';
+import Loader from 'components/UI/Loader/Loader';
 
 class SingleImageContainer extends Component {
-  static defaultProps = {};
-  static propTypes = {};
+  static propTypes = {
+    id: PropTypes.string,
+    image: PropTypes.object,
+    isFetching: PropTypes.bool,
+    fetchSingleImage: PropTypes.func
+  };
 
   componentDidMount() {
-    if (!this.props.image) {
+    const { image } = this.props;
+
+    if (!image) {
       this.fetchImage();
     }
   }

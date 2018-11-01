@@ -1,0 +1,51 @@
+@import '../../../assets/scss/includes';
+
+.container {
+    background-color: darken(#fff, 5%);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+}
+
+.list {
+    display: flex;
+    width: 100%;
+}
+
+.item {
+    flex: 1;
+    position: relative;
+    text-align: center;
+
+    &::before {
+        background-color: lighten(#000, 70%);
+        content: '';
+        display: block;
+        height: 50%;
+        left: 0;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 1px;
+    }
+
+    &:first-child::before {
+        display: none;
+    }
+}
+
+.link {
+    color: lighten(#000, 20%);
+    display: block;
+    font-size: 0.9em;
+    letter-spacing: 2px;
+    padding: 1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: font-weight 0.1s ease;
+}
+
+.linkActive {
+    font-weight: $font-weight-bold;
+}

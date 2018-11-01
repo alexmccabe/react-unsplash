@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
+
+import ImageList from './List';
+import Loader from 'components/UI/Loader/Loader';
+
 import * as imagesActions from 'actions/images';
 import {
   getVisibleImages,
@@ -9,21 +13,27 @@ import {
   getPageNumber
 } from 'reducers/imagesReducer';
 
-import ImageList from 'components/ImageList/ImageList';
-import Loader from 'components/Loader/Loader';
-
 class ImageListContainer extends Component {
-  static defaultProps = {};
-  static propTypes = {};
+  static propTypes = {
+    images: PropTypes.array.isRequired,
+    filter: PropTypes.string,
+    isFetching: PropTypes.bool,
+    pageNum: PropTypes.number,
+    fetchImages: PropTypes.func
+  };
 
   componentDidMount() {
-    if (!this.props.images.length) {
+    const { images } = this.props;
+
+    if (!images.length) {
       this.fetchData();
     }
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.filter !== prevProps.filter) {
+  componentDidUpdate({ filter: prevFilter }) {
+    const { filter: newFilter } = this.props;
+
+    if (newFilter !== prevFilter) {
       this.fetchData();
     }
   }
@@ -35,19 +45,22 @@ class ImageListContainer extends Component {
   };
 
   render() {
-    const { images, isFetching /* ...rest */ } = this.props;
+    const { images, isFetching, pageNum /* ...rest */ } = this.props;
 
-    if (isFetching && !images.length) {
+    if (isFetching && pageNum === 1) {
       return <Loader />;
     }
 
-    return <ImageList images={images} />;
+    if (images.length) {
+      return <ImageList images={images} />;
+    }
+
+    return <div>No images</div>;
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
   const filter = ownProps.match.params.filter || 'latest';
-  // const pageNum = ownProps.match.params.pageNum || 1;
 
   return {
     images: getVisibleImages(state, filter),

@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { Link } from 'react-router-dom';
 
 const SingleImage = ({ image }) => {
@@ -8,6 +10,10 @@ const SingleImage = ({ image }) => {
       <img src={image.urls.regular} alt="" />
     </div>
   );
+};
+
+SingleImage.propTypes = {
+  image: PropTypes.object.isRequired
 };
 
 export default SingleImage;

@@ -1,4 +1,4 @@
-// import unsplashHttp from 'http/unsplash';
+// import unsplashHttp from './http/unsplash';
 import { generateRandomInteger } from 'utils/math';
 import data from './images.json';
 
