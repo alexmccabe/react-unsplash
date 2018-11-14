@@ -7,18 +7,27 @@ import ScreensImageSingle from 'screens/Image/Single';
 const ScreensRoot = () => {
   return (
     <BrowserRouter>
-      <Switch>
-        <Route path="/photos/:id" component={ScreensImageSingle} />
-        {/*
-          * Force a redirect if the user tries to access just /photos.
-          * There's nothing  for them to see there, but it's technically
-          * a valid route.
-          */}
-        <Redirect from="/photos/" to="/" />
+      <div className="site">
+        <Switch>
+          <Route path="/photos/:id" component={ScreensImageSingle} />
+          {/*
+         * Force a redirect if the user tries to access just /photos.
+         * There's nothing  for them to see there, but it's technically
+         * a valid route.
+        */}
+          <Redirect from="/photos/" to="/" />
 
-        <Route path="/:filter(\w+)?" component={ScreensImageList} exact />
+          <Route path="/:filter(\w+)?" component={ScreensImageList} exact />
+        </Switch>
+      </div>
+    </BrowserRouter>
+  );
+};
 
-        {/* <Route path="/collections" component={CollectionsContainer} exact />
+export default ScreensRoot;
+
+{
+  /* <Route path="/collections" component={CollectionsContainer} exact />
 
         <Route path="/photos/:id" component={SingleImageContainer} />
 
@@ -27,10 +36,5 @@ const ScreensRoot = () => {
           path="/:filter(\w+)?/:pageNum?"
           component={ImageListContainer}
           exact
-        /> */}
-      </Switch>
-    </BrowserRouter>
-  );
-};
-
-export default ScreensRoot;
+        />  */
+}
