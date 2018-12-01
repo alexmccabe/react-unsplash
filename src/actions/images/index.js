@@ -7,10 +7,16 @@ import {
   FETCH_SINGLE_IMAGE_SUCCESS
 } from '../types';
 
+import { getIsFetching } from 'reducers/imagesReducer';
 import { imagesApi } from 'api';
 import * as schema from '../schema';
+import { Promise } from 'rsvp';
 
-export const fetchImages = (filter, pageNum) => dispatch => {
+export const fetchImages = (filter, pageNum) => (dispatch, getState) => {
+  // if (getIsFetching(getState())) {
+  //   return Promise.resolve();
+  // }
+
   dispatch({
     type: FETCH_IMAGES_REQUEST,
     filter,
