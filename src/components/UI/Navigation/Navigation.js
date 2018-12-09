@@ -1,35 +1,25 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
-import styles from './filter-menu.module.scss';
-// import PropTypes from 'prop-types';
 
-const FilterMenu = forwardRef(({ filters }, ref) => {
+import NavigationItem from './NavigationItem';
+import styles from './navigation.module.scss';
+
+const Navigation = forwardRef(({ navItems }, ref) => {
   return (
     <div className={styles.container} ref={ref}>
       <ul className={styles.list}>
-        {filters &&
-          filters.map((item, index) => {
-            return (
-              <li className={styles.item} key={index}>
-                <NavLink
-                  to={item.url}
-                  exact={item.exact}
-                  activeClassName={styles.linkActive}
-                  className={styles.link}
-                >
-                  {item.label}
-                </NavLink>
-              </li>
-            );
-          })}
+        {navItems.map((item, index) => {
+          return (
+            <NavigationItem key={index} url={item.url} label={item.label} />
+          );
+        })}
       </ul>
     </div>
   );
 });
 
-FilterMenu.propTypes = {
-  filters: PropTypes.arrayOf(
+Navigation.propTypes = {
+  navItems: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,
       url: PropTypes.string.isRequired,
@@ -38,4 +28,4 @@ FilterMenu.propTypes = {
   ).isRequired
 };
 
-export default FilterMenu;
+export default Navigation;

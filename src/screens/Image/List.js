@@ -1,7 +1,7 @@
 import React, { Component, createRef } from 'react';
 import Measure from 'react-measure';
 
-import ImageFilterMenu from 'components/Image/FilterMenu/FilterMenu';
+import Navigation from 'components/UI/Navigation/Navigation';
 import ImageListContainer from 'components/Image/List/ListContainer';
 import { setStyle } from 'utils';
 
@@ -28,9 +28,7 @@ class ScreensImageList extends Component {
       <div id="screen-image-list" ref={this.containerRef}>
         <Measure bounds onResize={this.onMeasureResize}>
           {({ measureRef }) => {
-            return (
-              <ImageFilterMenu ref={measureRef} filters={filterMenuItems} />
-            );
+            return <Navigation ref={measureRef} navItems={filterMenuItems} />;
           }}
         </Measure>
         <ImageListContainer />
